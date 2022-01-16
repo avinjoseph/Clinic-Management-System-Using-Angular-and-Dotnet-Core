@@ -1,0 +1,137 @@
+<div class="container-fluid bg-default">
+  <div class="container-fluid pt-4" align="center">
+    <h1 id="heading" class="mb-0 heading pt-4">WELCOME</h1>
+    <h1 id="green" class="mb-0 heading pt-4">&ensp;{{ loggedUserName }}!</h1>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a>
+            <img
+              src="../../assets/img/patient.png"
+              class="
+                rounded-circle
+                img-center img-fluid
+                shadow
+                shadow-lg--hover
+              "
+              id="card_image"
+            />
+          </a>
+          <div class="pt-4 text-center">
+            <h5 class="h3 title">
+              <span class="d-block mb-1">Patient Appoinment</span>
+              <small class="h4 font-weight-light text-muted">
+                <!--  Doctors sign in--></small
+              >
+            </h5>
+            <div class="mt-3">
+              <button
+                routerLink="../patient"
+                id="button"
+                class="btn btn-success"
+              >
+                Add
+              </button>
+              <button
+                routerLink="../patientlist"
+                id="button"
+                class="btn btn-success"
+              >
+                Patients
+              </button>
+              <button
+                routerLink="../patientappointments"
+                id="button"
+                class="btn btn-success"
+              >
+                Appoinments
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a>
+            <img
+              src="../../assets/img/agenda.png"
+              class="
+                rounded-circle
+                img-center img-fluid
+                shadow
+                shadow-lg--hover
+              "
+              id="card_image"
+            />
+          </a>
+          <div class="pt-4 text-center">
+            <h5 class="h3 title">
+              <span class="d-block mb-1">Payments</span>
+              <small class="h4 font-weight-light text-muted">
+                <!--  Patients sign in -->
+              </small>
+            </h5>
+            <div class="mt-3">
+              <button
+                routerLink="../paymentlist"
+                type="submit"
+                id="button"
+                class="btn btn-success"
+              >
+                Info
+              </button>
+              <button
+                routerLink="../patientappointments"
+                class="btn btn-success"
+                id="button"
+              >
+                Add
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a
+            ><img
+              src="../../assets/img/logout.png"
+              class="
+                rounded-circle
+                img-center img-fluid
+                shadow
+                shadow-lg--hover
+              "
+              id="card_image"
+          /></a>
+          <div class="pt-4 text-center">
+            <h5 class="h3 title">
+              <span class="d-block mb-1">Logout</span>
+
+              <small class="h4 font-weight-light text-muted">
+                <!--  Patients sign in -->
+              </small>
+            </h5>
+
+            <div class="mt-3">
+              <button
+                (click)="logOut()"
+                type="submit"
+                id="button"
+                class="btn btn-primary"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

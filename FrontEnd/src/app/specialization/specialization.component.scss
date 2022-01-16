@@ -1,0 +1,64 @@
+nav {
+  background-color: rgb(127, 236, 117);
+}
+
+#button {
+  background-color: rgb(127, 236, 117);
+  border: 0;
+  font-size: 120%;
+}
+
+#greenText {
+  color: rgb(127, 236, 117);
+}
+
+#image_specs {
+  vertical-align: middle;
+  padding: 50px 0px;
+  width: 100%;
+}
+
+label {
+  font-size: 1rem;
+  margin-bottom: 0.4em;
+  margin-top: 1.2em;
+  font-weight: 500;
+}
+
+input#IsActive {
+  margin-top: 1.5em;
+}
+
+#signup_card {
+  min-width: 20rem;
+  width: 75%;
+}
+
+#heading {
+  display: inline;
+  font-size: 150%;
+  font-weight: bold;
+}
+#green {
+  display: inline;
+  font-size: 150%;
+  font-weight: bold;
+  color: rgb(127, 236, 117);
+}
+
+.required {
+  color: red;
+}
+
+#breadCrumb {
+  color: white;
+}
+
+#navBar {
+  background-color: #172b4d;
+  margin-top: 10px;
+}
+
+div.signup_card {
+  padding: 15rem;
+}

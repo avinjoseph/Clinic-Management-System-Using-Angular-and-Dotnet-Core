@@ -1,0 +1,76 @@
+<div class="container-fluid bg-default pb-4">
+  <div class="container-fluid py-4">
+    <h1 id="heading" class="mb-0 heading pt-4">VIEW</h1>
+    <h1 id="green" class="mb-0 heading pt-4">&ensp;REPORTS</h1>
+    <a
+      id="button"
+      class="btn btn-primary"
+      style="float: right; margin: 10px"
+      href="http://localhost:4200/labtechnician/2"
+    >
+      Back
+    </a>
+  </div>
+  <br />
+  <div class="card" id="manage_patient_card">
+    <div class="card-header border-0">
+      <div class="row">
+        <div class="col-6"></div>
+      </div>
+    </div>
+    <!-- Light table -->
+    <div class="table-responsive">
+      <table class="table table-flush align-items-center">
+        <thead class="thead-light">
+          <tr>
+            <th>LabReport Id</th>
+            <th>Report Date</th>
+            <th>Patient Name</th>
+            <th>LabTechnician Name</th>
+            <th>Doctor Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--Depends on where we read here we used view model to display-->
+          <tr
+            *ngFor="
+              let testReport of testReportService.testReports
+                | filter: filter
+                | paginate: { itemsPerPage: 5, currentPage: page }
+            "
+          >
+            <td>{{ testReport.TestReportId }}</td>
+            <td>{{ testReport.ReportGeneratedDate | date: "dd-MM-yyyy" }}</td>
+            <td>{{ testReport.PatientName }}</td>
+            <td>{{ testReport.LabTechnicianName }}</td>
+            <td>{{ testReport.DoctorName }}</td>
+            <td>
+              <!-- <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="
+                  testReportService.deleteTestReport(testReport.TestReportId)
+                "
+              >
+                X</button
+              >&nbsp; -->
+              <button
+                (click)="viewLabReport(empId, testReport.TestReportId)"
+                class="btn btn-info"
+                style="margin-left: 10px"
+              >
+                View Reports
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="footer">
+        <!--pagenation-->
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+      <br />
+      <br />
+    </div>
+  </div>
+</div>

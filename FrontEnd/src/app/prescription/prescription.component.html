@@ -1,0 +1,74 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">ADD</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;PRESCRIPTION</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="prescriptionform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!--Prescription Id-->
+        <input
+          type="hidden"
+          name="PrescriptionId"
+          [(ngModel)]="preService.prescriptionForm.PrescriptionId"
+        />
+
+        <div class="form-group">
+          <!--Emloyee Name-->
+          <label>Prescription:</label>
+          <textarea
+            name="Prescription"
+            #Prescription="ngModel"
+            [(ngModel)]="preService.prescriptionForm.Prescription"
+            class="form-control"
+            placeholder="Add your prescription here..."
+            required
+            [ngClass]="{
+              'is-invalid': Prescription.touched && Prescription.invalid
+            }"
+            class="form-control"
+          ></textarea>
+          <div
+            class="validation-error"
+            *ngIf="Prescription.touched && Prescription.invalid"
+          >
+            <div *ngIf="Prescription.errors.required">
+              Prescription is required
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label>
+            <input type="checkbox" [value]="addLabTests" (change)="onAddLabTests($event)" />
+            Add Lab Tests
+          </label>
+        </div>
+
+        <div *ngFor="let CountryData of CountryData; let i=index" [hidden]="!addLabTests">
+          <label>
+            <input type="checkbox" [value]="CountryData.value" (change)="onCheckboxChange($event)" />
+            {{CountryData.value}}
+          </label>
+        </div>
+      
+
+        <div>
+          <button
+            type="submit"
+            [disabled]="!(form.valid && form.dirty)"
+            class="btn btn-success form-control"
+          >
+            Add Prescription
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

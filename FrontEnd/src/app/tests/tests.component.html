@@ -1,0 +1,90 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">TEST</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;DETAILS</h1>
+      <!-- <a
+        id="button"
+        class="btn btn-primary"
+        style="float: right; margin: 10px"
+        href="http://localhost:4200/labtechnician/2"
+      >
+        Back
+      </a> -->
+    </div>
+
+    <div class="card-body">
+      <form
+        name="empform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!--Emloyee Name-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Patient Name :</label
+              ><span>&ensp;{{ tests.PatientName }}</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Prescription Date :</label
+              ><span
+                >&ensp;{{ tests.PrescriptionDate | date: "yyyy-MM-dd" }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >TestReport Date :</label
+              ><span>&ensp;{{ date | date: "yyyy-MM-dd" }}</span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Prescribed Tests :</label
+              >
+              <div *ngFor="let t of prescribedTests">&ensp;{{ t }}</div>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" for="EmployeeName"
+            >Add Test Report :</label
+          ><span>*</span>
+          <textarea
+            name="TestReport"
+            id="TestReport"
+            #TestReport="ngModel"
+            [(ngModel)]="labTechnicianService.testForm.TestReport"
+            class="form-control"
+            placeholder="Add your TestReport here..."
+            required
+            [ngClass]="{
+              'is-invalid': TestReport.touched && TestReport.invalid
+            }"
+            class="form-control"
+          ></textarea>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!(form.valid && form.dirty)"
+          class="btn btn-success form-control"
+        >
+          Add Report
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

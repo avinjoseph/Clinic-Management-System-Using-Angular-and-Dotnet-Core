@@ -1,0 +1,116 @@
+<div class="container-fluid bg-default">
+  <div class="container-fluid pt-4" align="center">
+    <h1 id="heading" class="mb-0 heading pt-4">WELCOME</h1>
+    <h1 id="green" class="mb-0 heading pt-4">&ensp;{{ userName }}!</h1>
+  </div>
+  <div class="row mt-3">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a>
+            <img
+              src="../../assets/img/view.png"
+              class="
+                rounded-circle
+                img-center img-fluid
+                shadow
+                shadow-lg--hover
+              "
+              id="card_image"
+            />
+          </a>
+          <div class="pt-4 text-center">
+            <h5 class="h3 title">
+              <span class="d-block mb-1"></span>
+              <small class="h4 font-weight-light text-muted">
+                <!--login/signup-->
+              </small>
+            </h5>
+            <div class="mt-3">
+              <button
+                (click)="viewAppointments()"
+                type="submit"
+                id="button"
+                class="btn btn-primary"
+              >
+                View Appointments
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a>
+            <img
+              src="../../assets/img/medical-report.png"
+              class="
+                rounded-circle
+                img-center img-fluid
+                shadow
+                shadow-lg--hover
+              "
+              id="card_image"
+            />
+          </a>
+          <div class="pt-4 text-center">
+            <h5 class="h3 title">
+              <span class="d-block mb-1"></span>
+              <small class="h4 font-weight-light text-muted">
+                <!--  Doctors sign in--></small
+              >
+            </h5>
+            <div class="mt-3">
+              <button
+                (click)="viewLabRecords()"
+                id="button"
+                class="btn btn-primary"
+              >
+                View Reports
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <a>
+            <img
+              src="../../assets/img/logout.png"
+              class="
+                rounded-circle
+                img-center img-fluid
+                shadow
+                shadow-lg--hover
+              "
+              id="card_image"
+            />
+          </a>
+          <div class="pt-4 text-center">
+            <h5 class="h3 title">
+              <span class="d-block mb-1"></span>
+              <small class="h4 font-weight-light text-muted">
+                <!--  Patients sign in -->
+              </small>
+            </h5>
+            <div class="mt-3">
+              <button
+                (click)="logout()"
+                type="submit"
+                id="button"
+                class="btn btn-primary"
+              >
+                Logout
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

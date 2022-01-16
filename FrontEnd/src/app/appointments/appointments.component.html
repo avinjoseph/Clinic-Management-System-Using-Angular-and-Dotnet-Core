@@ -1,0 +1,90 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">BOOK</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;APPOINTMENT</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="appointmentform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!--Appointment Id-->
+        <input
+          type="hidden"
+          name="AppointmentId"
+          [(ngModel)]="appointmentService.formData.AppointmentId"
+        />
+
+        <!-- Doctor -->
+        <div class="form-group">
+          <label class="form-control-label" for="EmployeeId"
+            >Choose a doctor :</label
+          ><span class="required">*</span>
+          <select
+            class="form-select"
+            name="EmployeeId"
+            id="EmployeeId"
+            #EmployeeId="ngModel"
+            [(ngModel)]="appointmentService.formData.EmployeeId"
+            required
+            placeholder="Choose a doctor"
+          >
+            <option
+              *ngFor="let emp of appointmentService.employees"
+              value="{{ emp.EmployeeId }}"
+            >
+              {{ emp.EmployeeName }}
+            </option>
+          </select>
+          <div
+            class="validation-error"
+            *ngIf="EmployeeId.touched && EmployeeId.invalid"
+          >
+            <div *ngIf="EmployeeId.errors.required" class="required">
+              Doctor is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            class="form-control-label"
+            for="AppointmentDate"
+            >Appointment Date :</label
+          ><span class="required">*</span>
+          <input
+            type="date"
+            class="form-control"
+            min="Currentdate"
+            name="AppointmentDate"
+            #AppointmentDate="ngModel"
+            [(ngModel)]="appointmentService.formData.AppointmentDate"
+            required
+            [ngClass]="{
+              'is-invalid': AppointmentDate.touched && AppointmentDate.invalid
+            }"
+          />
+          <div
+            class="validation-error"
+            *ngIf="AppointmentDate.touched && AppointmentDate.invalid"
+          >
+            <div *ngIf="AppointmentDate.errors.required" class="required">
+              Appointment date is required
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="!(form.valid && form.dirty)"
+          class="btn btn-success form-control"
+        >
+          Book Appointment
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

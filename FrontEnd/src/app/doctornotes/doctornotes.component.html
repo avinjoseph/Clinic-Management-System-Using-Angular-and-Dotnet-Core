@@ -1,0 +1,84 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">DOCTOR</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;NOTES</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="empform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!--Emloyee Name-->
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Patient Name :</label
+              >
+              <span>&ensp;{{ patientName }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <table class="table table-flush align-items-center">
+            <thead class="thead-light">
+              <tr>
+                <th>Doctor Name</th>
+                <th>Note Date</th>
+                <th>Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!--Depends on where we read here we used view model to display-->
+              <tr
+                *ngFor="
+                  let n of doctornoteService.notes
+                    | filter: filter
+                    | paginate: { itemsPerPage: 5, currentPage: page }
+                "
+              >
+                <td>{{ n.DoctorName }}</td>
+                <td>{{ n.NoteDate | date: "dd-MM-yyyy" }}</td>
+                <td>{{ n.Note }}</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="footer">
+            <!--pagenation-->
+            <pagination-controls
+              (pageChange)="page = $event"
+            ></pagination-controls>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <!--Emloyee Name-->
+          <label>Note:</label>
+          <textarea
+            name="Note"
+            #Note="ngModel"
+            [(ngModel)]="doctornoteService.notesForm.Note"
+            class="form-control"
+            placeholder="Add your notes here..."
+            required
+            [ngClass]="{
+              'is-invalid': Note.touched && Note.invalid
+            }"
+            class="form-control"
+          ></textarea>
+          <div class="validation-error" *ngIf="Note.touched && Note.invalid">
+            <div *ngIf="Note.errors.required">Note is required</div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-success form-control">
+          Add Note
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

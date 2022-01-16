@@ -1,0 +1,180 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h3 id="heading" class="mb-0 heading">
+        {{
+          testReportService.isReadOnly == true
+            ? "View Lab Report"
+            : "Add Lab
+        Report"
+        }}
+      </h3>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="testreportform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!-- <h6 class="heading-small text-muted mb-4">Personal information</h6> -->
+        <!--Test Report Id-->
+        <input
+          type="hidden"
+          name="TestReportId"
+          [(ngModel)]="testReportService.newTestReport.TestReportId"
+        />
+
+        <!--date of report-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="ReportGeneratedDate"
+                >Date of report: :</label
+              ><span class="required">*</span>
+              <input
+                type="date"
+                class="form-control"
+                name="ReportGeneratedDate"
+                id="ReportGeneratedDate"
+                #ReportGeneratedDate="ngModel"
+                [(ngModel)]="
+                  testReportService.newTestReport.ReportGeneratedDate
+                "
+                required
+                [ngClass]="{
+                  'is-invalid':
+                    ReportGeneratedDate.touched && ReportGeneratedDate.invalid
+                }"
+                [readonly]="testReportService.isReadOnly"
+              />
+              <div
+                class="validation-error"
+                *ngIf="
+                  ReportGeneratedDate.touched && ReportGeneratedDate.invalid
+                "
+              >
+                <div *ngIf="ReportGeneratedDate.errors.required">
+                  Date of Report is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Emloyee Age-->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="PatientId">Patient :</label
+              ><span class="required">*</span>
+              <select
+                class="form-control"
+                [disabled]="testReportService.isReadOnly"
+                name="PatientId"
+                id="PatientId"
+                #PatientId="ngModel"
+                [(ngModel)]="testReportService.newTestReport.PatientId"
+                required
+                placeholder="Choose Patient"
+              >
+                <option
+                  *ngFor="let patient of patientService.patients"
+                  value="{{ patient.PatientId }}"
+                >
+                  {{ patient.PatientName }}
+                </option>
+              </select>
+              <div
+                class="validation-error"
+                *ngIf="PatientId.touched && PatientId.invalid"
+              >
+                <div *ngIf="PatientId.errors.required">Patient is required</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label
+                class="form-control-label"
+                class="form-control-label"
+                for="DoctorId"
+                >Doctor</label
+              ><span class="required">*</span>
+              <select
+                placeholder="Choose Doctor"
+                class="form-control"
+                [disabled]="testReportService.isReadOnly"
+                name="DoctorId"
+                id="DoctorId"
+                #DoctorId="ngModel"
+                [(ngModel)]="testReportService.newTestReport.DoctorId"
+                required
+              >
+                <option
+                  *ngFor="let emp of testReportService.doctors"
+                  value="{{ emp.EmployeeId }}"
+                >
+                  {{ emp.EmployeeName }}
+                </option>
+              </select>
+              <div
+                class="validation-error"
+                *ngIf="DoctorId.touched && DoctorId.invalid"
+              >
+                <div *ngIf="DoctorId.errors.required">Doctor is required</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="MobileNo"
+                >Test Report :</label
+              ><span class="required">*</span>
+              <textarea
+                name="TestReport"
+                #TestReport="ngModel"
+                [(ngModel)]="testReportService.newTestReport.TestReport"
+                class="form-control"
+                placeholder="Add your lab report here..."
+                required
+                [ngClass]="{
+                  'is-invalid': TestReport.touched && TestReport.invalid
+                }"
+                [readonly]="testReportService.isReadOnly"
+              ></textarea>
+              <div
+                class="validation-error"
+                *ngIf="TestReport.touched && TestReport.invalid"
+              >
+                <div *ngIf="TestReport.errors.required">
+                  Test Report is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            [disabled]="!(form.valid && form.dirty)"
+            *ngIf="testReportService.isReadOnly == false"
+            class="btn btn-success form-control"
+          >
+            Register
+          </button>
+
+          <button
+            type="button"
+            (click)="resetForm(form)"
+            class="btn btn-success form-control"
+          >
+            Go Back
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

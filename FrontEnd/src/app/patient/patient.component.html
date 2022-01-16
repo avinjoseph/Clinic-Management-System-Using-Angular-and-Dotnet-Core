@@ -1,0 +1,212 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">PATIENT</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;REGISTRATION</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="empform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!--Patient Id-->
+        <input
+          type="hidden"
+          name="PatientId"
+          #PatientId="ngModel"
+          [(ngModel)]="patientService.formData.PatientId"
+        />
+
+        <!--Patient Name-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="PatientName"
+                >Patient Name :</label
+              ><span class="required">*</span>
+              <input
+                name="PatientName"
+                #PatientName="ngModel"
+                [(ngModel)]="patientService.formData.PatientName"
+                class="form-control"
+                placeholder="Enter Full Name"
+                required
+                minlength="1"
+                pattern="[A-Za-z ]+"
+                [ngClass]="{
+                  'is-invalid': PatientName.touched && PatientName.invalid
+                }"
+              />
+              <div
+                class="validation-error"
+                *ngIf="PatientName.touched && PatientName.invalid"
+              >
+                <div
+                  class="validation-error"
+                  *ngIf="PatientName.touched && PatientName.invalid"
+                >
+                  <div *ngIf="PatientName.errors.required" class="required">
+                    Name is required
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Patient Age-->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="Age">Age :</label
+              ><span class="required">*</span>
+              <input
+                type="number"
+                name="Age"
+                #Age="ngModel"
+                [(ngModel)]="patientService.formData.Age"
+                class="form-control"
+                placeholder="Enter your age"
+                required
+                [ngClass]="{ 'is-invalid': Age.touched && Age.invalid }"
+                min="23"
+                max="65"
+              />
+              <div class="validation-error" *ngIf="Age.touched && Age.invalid">
+                <div *ngIf="Age.errors.required" class="required">
+                  Age is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Address -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label
+                class="form-control-label"
+                class="form-control-label"
+                for="Address"
+                >Address :
+              </label>
+              <span class="required">*</span>
+              <input
+                type="text"
+                class="form-control"
+                name="Address"
+                #Address="ngModel"
+                placeholder="Enter address"
+                [(ngModel)]="patientService.formData.Address"
+                required
+                [ngClass]="{
+                  'is-invalid': Address.touched && Address.invalid
+                }"
+              />
+              <div
+                class="validation-error"
+                *ngIf="Address.touched && Address.invalid"
+              >
+                <div *ngIf="Address.errors.required" class="required">
+                  Address is required
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!--Mobile Number-->
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="MobileNo">MobileNo :</label
+              ><span class="required">*</span>
+              <input
+                type="tel"
+                name="MobileNo"
+                #MobileNo="ngModel"
+                [(ngModel)]="patientService.formData.MobileNo"
+                class="form-control"
+                placeholder="Enter your MobileNo (eg:1234567892)"
+                required
+                pattern="[0-9]{10}"
+                [ngClass]="{
+                  'is-invalid': MobileNo.touched && MobileNo.invalid
+                }"
+              />
+              <div
+                class="validation-error"
+                *ngIf="MobileNo.touched && MobileNo.invalid"
+              >
+                <div *ngIf="MobileNo.errors.required" class="required">
+                  MobileNo is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gender -->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label
+                class="form-control-label"
+                class="form-control-label"
+                for="Gender"
+                id="gender"
+                >Gender</label
+              ><span class="required">*</span>
+
+              <input
+                type="radio"
+                name="Gender"
+                id="Gender"
+                #Gender="ngModel"
+                value="male"
+                [(ngModel)]="patientService.formData.Gender"
+              />
+              <label class="form-control-label" for="Male" id="gender"
+                >&ensp;Male</label
+              >
+
+              <input
+                type="radio"
+                name="Gender"
+                id="Gender"
+                #Gender="ngModel"
+                value="female"
+                [(ngModel)]="patientService.formData.Gender"
+              />
+              <label class="form-control-label" for="Female" id="gender"
+                >&ensp;Female</label
+              >
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <div class="form-check">
+                <label class="col-md-4" id="isactive">Is Active</label>
+                <input
+                  type="checkbox"
+                  name="IsActive"
+                  id="IsActive"
+                  #IsActive="ngModel"
+                  [(ngModel)]="patientService.formData.IsActive"
+                  class="form-check-input"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="!(form.valid && form.dirty)"
+          class="btn btn-success form-control"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

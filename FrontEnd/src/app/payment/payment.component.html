@@ -1,0 +1,129 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">ADD</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;PAYMENT</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="paymentform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!-- <h6 class="heading-small text-muted mb-4">Personal information</h6> -->
+        <!--Employee Id-->
+        <input
+          type="hidden"
+          name="PaymentId"
+          [(ngModel)]="payService.formData.PaymentId"
+        />
+
+        <!--Total Amount-->
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="Total Amount"
+                >Total Amount:</label
+              ><span class="required">*</span>
+              <input
+                type="number"
+                name="Amount"
+                #Amount="ngModel"
+                [(ngModel)]="payService.formData.Amount"
+                class="form-control"
+                placeholder="Enter Total Amount"
+                min="1"
+                required
+                [ngClass]="{ 'is-invalid': Amount.touched && Amount.invalid }"
+              />
+              <div
+                class="validation-error"
+                *ngIf="Amount.touched && Amount.invalid"
+              >
+                <div *ngIf="Amount.errors.required">Amount required</div>
+              </div>
+            </div>
+          </div>
+
+          <!--Patient Name-->
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="PatientName"
+                >Patient Name</label
+              >
+              <span class="required">*</span>
+              <select
+                class="form-control"
+                name="PatientId"
+                id="PatientId"
+                #PatientId="ngModel"
+                [(ngModel)]="payService.formData.PatientId"
+                required
+                readonly
+                disabled="readonly"
+              >
+                <option
+                  *ngFor="let p of payService.patients"
+                  value="{{ p.PatientId }}"
+                >
+                  {{ p.PatientName }}
+                </option>
+              </select>
+              <div
+                class="validation-error"
+                *ngIf="PatientId.touched && PatientId.invalid"
+              >
+                <div *ngIf="PatientId.errors.required">
+                  PatientId is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label
+                class="form-control-label"
+                class="form-control-label"
+                for="DateOfJoining"
+                >Payment Date</label
+              ><span class="required">*</span>
+              <input
+                type="date"
+                class="form-control"
+                name="PaymentDate"
+                #PaymentDate="ngModel"
+                [(ngModel)]="payService.formData.PaymentDate"
+                required
+                [ngClass]="{
+                  'is-invalid': PaymentDate.touched && PaymentDate.invalid
+                }"
+              />
+              <div
+                class="validation-error"
+                *ngIf="PaymentDate.touched && PaymentDate.invalid"
+              >
+                <div *ngIf="PaymentDate.errors.required">
+                  Date of payment is required
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          [disabled]="!(form.valid && form.dirty)"
+          class="btn btn-success form-control"
+        >
+          Add Payment
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

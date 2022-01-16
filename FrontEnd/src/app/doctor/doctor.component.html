@@ -1,0 +1,119 @@
+<div class="container-fluid bg-default pb-4">
+  <div class="container-fluid py-4">
+    <h1 id="heading" class="mb-0 heading pt-4">PATIENT</h1>
+    <h1 id="green" class="mb-0 heading pt-4">&ensp;DETAILS</h1>
+    <button
+      class="btn btn-primary"
+      style="float: right; margin: 10px"
+      (click)="logout()"
+      id="button"
+    >
+      Logout
+    </button>
+    <!--search-->
+    <div class="form-outline">
+      <br />
+    </div>
+  </div>
+
+  <div class="card" id="manage_patient_card">
+    <div class="card-header border-0">
+      <div class="row">
+        <div class="col-6"></div>
+      </div>
+    </div>
+
+    <!-- Light table -->
+    <div class="table-responsive">
+      <table class="table table-flush align-items-center">
+        <thead class="thead-light">
+          <tr>
+            <td colspan="8">
+              <input
+                class="form-control"
+                type="text"
+                placeholder="Search....."
+                [(ngModel)]="filter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Contact</th>
+            <th>Gender</th>
+            <th>Date</th>
+            <th>Apointment Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr
+            *ngFor="
+              let patient of doctorService.patients
+                | filter: filter
+                | paginate: { itemsPerPage: 5, currentPage: page }
+            "
+          >
+            <td>{{ patient.PatientId }}</td>
+            <td>{{ patient.PatientName }}</td>
+            <td>{{ patient.Age }}</td>
+            <td>{{ patient.MobileNo }}</td>
+            <td>{{ patient.Gender }}</td>
+            <td>{{ patient.AppointmentDate | date: "dd-MM-yyyy" }}</td>
+            <td>{{ patient.AppointmentStatus }}</td>
+            <td>
+              <button
+                class="btn  btn-outline-danger"
+                (click)="DeleteAppointment(patient.AppointmentId)"
+                data-toggle="tooltip" data-placement="top" title="Cancel Appointment"
+              >
+              <i class="fas fa-trash"></i></button
+              >&nbsp;
+              <button
+                (click)="
+                  AddPrescription(patient.PatientId, patient.AppointmentId)
+                "
+                class="btn btn-outline-primary"
+                style="margin-left: 10px"
+                [disabled]="!isDisabled(patient.AppointmentStatus)"
+                data-toggle="tooltip" data-placement="top" title="Add Prescription"
+              > 
+              
+              <i class="fas fa-plus"></i></button
+              >&nbsp;
+              <button
+                (click)="
+                  ViewLabResults(patient.PatientId, patient.AppointmentId)
+                "
+                class="btn btn-outline-primary"
+                style="margin-left: 10px"
+                data-toggle="tooltip" data-placement="top" title="View Lab Results"
+              >
+              
+              <i class="fas fa-eye"></i>
+              </button>
+              &nbsp;
+              <button
+                (click)="
+                  ViewHistory(patient.PatientId)
+                "
+                class="btn btn-outline-primary"
+                style="margin-left: 10px"
+                data-toggle="tooltip" data-placement="top" title="Prescription History"
+              >
+              <i class="fas fa-file-medical"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="margin-top: 35px">
+        <!--pagenation-->
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="container-fluid bg-default" id="main_container">
+  <div class="header py-4 py-lg-4 pt-lg-6">
+    <div class="container">
+      <div class="header-body text-center mb-7">
+        <div class="row justify-content-center">
+          <div class="col-xl-5 col-lg-6 col-md-8 px-5">
+            <h1 class="text-white">Welcome to</h1>
+            <img
+              class="mb-2"
+              id="welcome_logo"
+              src="../../assets/img/Logo_cms.png"
+            />
+
+            <p class="text-lead text-white">
+              Your health is our responsiblity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid mt--9" id="image_specs">
+    <div class="card text-center ml-auto mr-auto" id="login_card">
+      <div class="card-header">
+        <h1 id="heading" class="mb-0 heading">LOG</h1>
+        <h1 id="green" class="mb-0 heading">IN</h1>
+      </div>
+
+      <div class="card-body">
+        <form
+          class="needs-validation"
+          id="login_form"
+          [formGroup]="loginForm"
+          (ngSubmit)="loginCredentials()"
+        >
+          <div class="form-row mb-4">
+            <label class="form-control-label" for="emailId">Email</label>
+            <input
+              type="email"
+              placeholder="Enter Email"
+              formControlName="UserName"
+              autocomplete="off"
+              required
+              class="form-control"
+              autocomplete="off"
+            />
+          </div>
+          <div *ngIf="isSubmitted && formControls.UserName.errors">
+            <div
+              *ngIf="formControls.UserName.errors.required"
+              style="color: red"
+            >
+              Email is required.
+            </div>
+          </div>
+
+          <div class="form-row mb-4">
+            <label class="form-control-label" for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              formControlName="Password"
+              id="Password"
+              required
+              placeholder="Enter Password"
+            />
+          </div>
+          <div *ngIf="isSubmitted && formControls.Password.errors">
+            <div
+              *ngIf="formControls.Password.errors.required"
+              style="color: red"
+            >
+              Password is required.
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-auto mr-auto ml-auto">
+              <button type="submit" id="button" class="btn btn-primary lt-6">
+                Login
+              </button>
+            </div>
+          </div>
+          <div *ngIf="error" style="color: red">
+            {{ error }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

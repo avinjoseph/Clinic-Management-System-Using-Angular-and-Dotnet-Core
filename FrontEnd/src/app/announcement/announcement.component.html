@@ -1,0 +1,91 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">ADD</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;ANNOUNCEMENT</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="formData"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!--AnnText Id-->
+        <input
+          type="hidden"
+          name="AnnId"
+          [(ngModel)]="announcementService.formData.AnnId"
+        />
+
+        <div class="form-group">
+          <!--Announcement-->
+          <label>Announcement:</label>
+          <textarea
+            name="AnnText"
+            #AnnText="ngModel"
+            [(ngModel)]="announcementService.formData.AnnText"
+            class="form-control"
+            placeholder="Add  Announcements here..."
+            required
+            [ngClass]="{
+              'is-invalid': AnnText.touched && AnnText.invalid
+            }"
+            class="form-control"
+          ></textarea>
+          <div
+            class="validation-error"
+            *ngIf="AnnText.touched && AnnText.invalid"
+          >
+            <div *ngIf="AnnText.errors.required">
+              announcement is required
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label
+            class="form-control-label"
+            class="form-control-label"
+            for="AnnDate"
+            >Event Date :</label
+          ><span class="required">*</span>
+          <input
+            type="date"
+            class="form-control"
+            name="AnnDate"
+            #AnnDate="ngModel"
+            [(ngModel)]="announcementService.formData.AnnDate"
+            required
+            [ngClass]="{
+              'is-invalid': AnnDate.touched && AnnDate.invalid
+            }"
+          />
+          <div
+            class="validation-error"
+            *ngIf="AnnDate.touched && AnnDate.invalid"
+          >
+            <div *ngIf="AnnDate.errors.required" class="required">
+              Event date is required
+            </div>
+          </div>
+        </div>
+
+        
+
+        
+
+        <div>
+          <button
+            type="submit"
+            [disabled]="!(form.valid && form.dirty)"
+            class="btn btn-success form-control"
+            
+          >
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

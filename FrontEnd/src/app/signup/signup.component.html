@@ -1,0 +1,89 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">EMPLOYEE</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;SIGNUP</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="signupForm"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!-- <h6 class="heading-small text-muted mb-4">Personal information</h6> -->
+        <!--Login Id-->
+        <input
+          type="hidden"
+          name="LoginId"
+          [(ngModel)]="empService.loginForm.LoginId"
+        />
+
+        <!--Emloyee Name-->
+        <div class="form-group">
+          <label class="form-control-label" for="UserName">UserName :</label
+          ><span class="required">*</span>
+          <input
+            name="UserName"
+            id="UserName"
+            #UserName="ngModel"
+            [(ngModel)]="empService.loginForm.UserName"
+            class="form-control"
+            placeholder="Enter Email"
+            minlength="1"
+            required
+            [ngClass]="{
+              'is-invalid': UserName.touched && UserName.invalid
+            }"
+          />
+          <div
+            class="validation-error"
+            *ngIf="UserName.touched && UserName.invalid"
+          >
+            <div
+              class="validation-error"
+              *ngIf="UserName.touched && UserName.invalid"
+            >
+              <div *ngIf="UserName.errors.required" class="required">
+                User Name is required
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-control-label" for="password">Password:</label>
+          <input
+            type="password"
+            name="Password"
+            id="password"
+            #Password="ngModel"
+            [(ngModel)]="empService.loginForm.Password"
+            class="form-control"
+            placeholder="Create a new Password"
+            pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+            title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+            required
+            [ngClass]="{
+              'is-invalid': Password.touched && Password.invalid
+            }"
+          />
+          <div
+            class="validation-error"
+            *ngIf="Password.touched && Password.invalid"
+          >
+            <div *ngIf="Password.errors.required">Password is required</div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="!(form.valid && form.dirty)"
+          class="btn btn-success form-control"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

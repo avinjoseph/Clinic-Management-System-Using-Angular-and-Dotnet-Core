@@ -1,0 +1,86 @@
+<div class="container-fluid bg-default" id="image_specs">
+
+    <div class="card my-2 mx-auto" id="signup_card">
+        <div class="card-header text-center">
+            <h1 id="heading" class="mb-0 heading">CONTACT</h1>
+            <h1 id="green" class="mb-0 heading"> FORM</h1>
+        </div>
+        <div class="card-body">
+            <form class="needs-validation" id="sign_up_patient_form" [formGroup]="ContactForm"
+                (ngSubmit)="onSubmit()">
+                <h6 class="heading-small text-muted mb-4">Contact information</h6>
+                <div class="row">
+                    <div class="col">
+                        <div class="form-group">
+                            <label class="form-control-label" for="emailId">Email</label><span class="required">*</span>
+                            <input type="email" maxlength="50" class="form-control" id="emailId"
+                                placeholder="Enter Email" formControlName="emailId"
+                                [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }">
+                            <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+                                <div *ngIf="f.emailId.errors.required">Email ID is required</div>
+                                <div *ngIf="f.emailId.errors.minlength">Email ID should be at least 4 characters</div>
+                                <div *ngIf="f.emailId.errors.maxlength">Email ID should be at most 50 characters</div>
+                                <div *ngIf="f.emailId.errors.pattern">Email ID should be of correct format</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="firstName">Name</label><span
+                                class="required">*</span>
+                            <input type="text" maxlength="30" class="form-control" id="firstName"
+                                placeholder="Enter Name" formControlName="firstName"
+                                [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }">
+                            <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                                <div *ngIf="f.firstName.errors.required">Name is required</div>
+                                <div *ngIf="f.firstName.errors.minlength">Name should be at least 4 characters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="contactNumber">Contact Number</label><span
+                                class="required">*</span>
+                            <input type="text" minlength="10" maxlength="10" class="form-control" id="contactNumber"
+                                placeholder="Enter Contact Number" formControlName="contactNumber" pattern="[0-9]{10}"
+                                [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }">
+                            <div *ngIf="submitted && f.contactNumber.errors" class="invalid-feedback">
+                                <div *ngIf="f.contactNumber.errors.required">Contact Number is required</div>
+                                <div *ngIf="f.contactNumber.errors.minlength">Contact Number should be at least 10
+                                    characters</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="form-control-label" for="queries">Queries</label>
+                            <textarea type="text" minlength="1" class="form-control" id="queries"
+                                placeholder="Enter the queries" formControlName="queries"
+                                >
+                            </textarea>
+                        </div>
+                    </div>
+
+                </div>
+               
+               
+                
+                <button type="submit" id="button" class="btn btn-primary">
+                    Send
+                </button>
+
+
+
+            </form>
+        </div>
+    </div>
+
+</div>

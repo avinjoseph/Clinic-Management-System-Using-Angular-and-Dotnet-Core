@@ -1,0 +1,63 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">EMPLOYEE</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;SPECIALIZATION</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="specializationform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit(form)"
+      >
+        <!-- <h6 class="heading-small text-muted mb-4">Personal information</h6> -->
+        <!--Employee Id-->
+        <input
+          type="hidden"
+          name="ESId"
+          [(ngModel)]="empService.specializationForm.ESId"
+        />
+
+        <!--Emloyee Name-->
+        <div class="row">
+          <div class="form-group">
+            <label class="col-md-4">Specialization:</label>
+            <select
+              class="form-control"
+              name="SpecializationId"
+              id="SpecializationId"
+              #SpecializationId="ngModel"
+              [(ngModel)]="empService.specializationForm.SpecializationId"
+              required
+            >
+              <option value="0" disabled>Choose a Specialization</option>
+              <option
+                *ngFor="let s of empService.specializations"
+                value="{{ s.SpecializationId }}"
+              >
+                {{ s.SpecializationName }}
+              </option>
+            </select>
+            <div
+              class="validation-error"
+              *ngIf="SpecializationId.touched && SpecializationId.invalid"
+            >
+              <div *ngIf="SpecializationId.errors.required">
+                Specialization is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          [disabled]="!(form.valid && form.dirty)"
+          class="btn btn-success form-control"
+        >
+          Register
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

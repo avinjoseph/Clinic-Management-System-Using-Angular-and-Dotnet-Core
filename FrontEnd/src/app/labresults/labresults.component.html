@@ -1,0 +1,72 @@
+<div class="container-fluid bg-default" id="image_specs">
+  <div class="card my-2 mx-auto" id="signup_card">
+    <div class="card-header text-center">
+      <h1 id="heading" class="mb-0 heading">TEST</h1>
+      <h1 id="green" class="mb-0 heading">&ensp;REPORTS</h1>
+    </div>
+
+    <div class="card-body">
+      <form
+        name="empform"
+        #form="ngForm"
+        autocomplete="off"
+        (ngSubmit)="onSubmit()"
+      >
+        <!--Emloyee Name-->
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Patient Name :</label
+              >
+              <span>&ensp;{{ report[0].PatientName }}</span>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Report Generated Date :</label
+              >
+              <span
+                >&ensp;{{
+                  report[0].ReportGeneratedDate | date: "yyyy-MM-dd"
+                }}</span
+              >
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Lab Technician Name:</label
+              >
+              <span>&ensp;{{ report[0].LabTechnicianName }}</span>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="form-control-label" for="EmployeeName"
+                >Prescribed Doctor :</label
+              >
+              <span>&ensp;{{ report[0].DoctorName }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-control-label" for="EmployeeName"
+            >Test Results :</label
+          >
+          <div *ngFor="let r of report">&ensp;{{ r.TestReport }}<br /></div>
+        </div>
+
+        <button type="submit" class="btn btn-success form-control">
+          Add Notes
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

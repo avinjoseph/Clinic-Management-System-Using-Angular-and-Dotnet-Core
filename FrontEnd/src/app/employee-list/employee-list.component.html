@@ -1,0 +1,90 @@
+<div class="container-fluid bg-default pb-4">
+  <div class="container-fluid py-4">
+    <h1 id="heading" class="mb-0 heading pt-4">VIEW</h1>
+    <h1 id="green" class="mb-0 heading pt-4">&ensp;EMPLOYEES</h1>
+    <button
+      id="button"
+      class="btn btn-primary"
+      style="float: right; margin: 10px"
+      [routerLink]="['../admin']"
+    >
+      Back
+    </button>
+  </div>
+
+  <div class="card" id="manage_patient_card" style="margin-top: 5px">
+    <div class="card-header border-0">
+      <div class="row">
+        <div class="col-6"></div>
+      </div>
+    </div>
+    <!-- Light table -->
+    <div class="table-responsive">
+      <table class="table table-flush align-items-center">
+        <thead class="thead-light">
+          <tr>
+            <td colspan="8">
+              <!--search-->
+              <input
+                style="margin-top: 10px"
+                class="form-control"
+                type="text"
+                placeholder="Search....."
+                [(ngModel)]="filter"
+              />
+            </td>
+          </tr>
+          <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Mobile</th>
+            <th>Gender</th>
+            <th>Date of Joining</th>
+            <th>Is Active</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--Depends on where we read here we used view model to display-->
+          <tr
+            *ngFor="
+              let emp of empService.employees
+                | filter: filter
+                | paginate: { itemsPerPage: 5, currentPage: page }
+            "
+          >
+            <td (click)="populateForm(emp)">{{ emp.EmployeeId }}</td>
+            <td (click)="populateForm(emp)">{{ emp.EmployeeName }}</td>
+            <td (click)="populateForm(emp)">{{ emp.Age }}</td>
+            <td (click)="populateForm(emp)">{{ emp.MobileNo }}</td>
+            <td (click)="populateForm(emp)">{{ emp.Gender }}</td>
+            <td (click)="populateForm(emp)">
+              {{ emp.DateOfJoining | date: "dd-MM-yyyy" }}
+            </td>
+            <td (click)="populateForm(emp)">{{ emp.IsActive }}</td>
+            <td>
+              <button
+                class="btn btn-sm btn-outline-danger"
+                (click)="deleteEmployee(emp.EmployeeId)"
+              >
+                X
+              </button>
+              <button
+                (click)="updateEmployee(emp.EmployeeId)"
+                class="btn btn-info"
+                style="margin-left: 10px"
+              >
+                Edit
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="footer">
+        <!--pagenation-->
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
